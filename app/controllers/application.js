@@ -3,7 +3,7 @@ import { computed } from '@ember/object';
 
 export default Controller.extend({
   welcomeText: "Welcome, I'm your Expenze Buddy!",
-  totalAmount: computed('model.[]', function(){
+  totalAmount: computed('model.@each.amount', function(){
           return this.get('model').reduce((previousValue, item) =>{
                   return parseFloat(item.get('amount')) + previousValue;
           }, 0);
@@ -13,19 +13,10 @@ export default Controller.extend({
       lineItem.destroyRecord();
     },
     addNewLineItem(){
-      let lineItem = this.get('store').createRecord('line-item', {
-        description: this.get('newDescription'),
-        date: new Date(this.get('newDate')),
-        amount: this.get('newAmount'),
-        isExpense: this.get('newIsExpense'),
-      });
+      this.get('store').createRecord('line-item');
+    },
+    saveLineItem(lineItem){
       lineItem.save();
-      this.setProperties({
-        newDescription: '',
-        newDate: '',
-        newAmount: '',
-        newIsExpense: false,
-      })
     }
   }
 });

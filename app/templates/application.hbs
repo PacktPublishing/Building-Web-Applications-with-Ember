@@ -38,32 +38,46 @@
   <tbody>
     {{#each model as |lineItem|}}
       <tr class="{{unless lineItem.isExpense 'info'}}">
-        <td>{{lineItem.description}}</td>
-        <td>{{lineItem.date}}</td>
-        <td>{{lineItem.amount}}</td>
-        <td>{{percentage lineItem.amount totalAmount}}%</td>
-        <td><button {{action 'deleteLineItem' lineItem}} type="button" class="btn btn-danger">Delete</button></td>
+        {{#if lineItem.isNew}}
+          <td>
+            {{input type="text" value=lineItem.description placeholder="Description"}}
+            {{#if (v-get lineItem 'description' 'isInvalid')}}
+              <div class="text-danger">
+                {{v-get lineItem 'description' 'message'}}
+              </div>
+            {{/if}}
+          </td>
+          <td>
+            {{input type="date" value=lineItem.date placeholder="Date"}}
+          </td>
+          <td>
+            {{input type="text" value=lineItem.amount placeholder="Amount"}}
+            {{#if (v-get lineItem 'amount' 'isInvalid')}}
+              <div class="text-danger">
+                {{v-get lineItem 'amount' 'message'}}
+              </div>
+            {{/if}}
+          </td>
+          <td>
+            <label>
+              {{input type="checkbox" checked=lineItem.isExpense}}
+              Is an Expense
+            </label>
+          </td>
+          <td>
+            <button {{action 'saveLineItem' lineItem}} type="button" class="btn btn-primary">Save</button>
+          </td>
+        {{else}}
+          <td>{{lineItem.description}}</td>
+          <td>{{lineItem.date}}</td>
+          <td>{{lineItem.amount}}</td>
+          <td>{{percentage lineItem.amount totalAmount}}%</td>
+          <td><button {{action 'deleteLineItem' lineItem}} type="button" class="btn btn-danger">Delete</button></td>
+        {{/if}}
       </tr>
     {{/each}}
   </tbody>
   <tfoot>
-    <tr>
-      <td>
-        {{input type="text" value=newDescription placeholder="Description"}}
-      </td>
-      <td>
-        {{input type="date" value=newDate placeholder="Date"}}
-      </td>
-      <td>
-        {{input type="text" value=newAmount placeholder="Amount"}}
-      </td>
-      <td>
-        <label>
-          {{input type="checkbox" checked=newIsExpense}}
-          Is an Expense
-        </label>
-      </td>
-    </tr>
     <tr>
       <td colspan="5">
         <button {{action 'addNewLineItem'}} class="btn btn-default">Add Line Item</button>
