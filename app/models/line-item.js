@@ -13,5 +13,6 @@ export default DS.Model.extend(Validations, {
   description: DS.attr('string'),
   date: DS.attr('date'),
   amount: DS.attr('number'),
-  isExpense: DS.attr('boolean')
+  isExpense: DS.attr('boolean'),
+  category: DS.belongsTo('category')
 });

@@ -8,7 +8,13 @@ export default Controller.extend({
                   return parseFloat(item.get('amount')) + previousValue;
           }, 0);
   }),
+  categories: computed(function(){
+    return this.get('store').findAll('category');
+  }),
   actions: {
+    changeCategory(lineItem, category){
+      lineItem.set('category', category);
+    },
     deleteLineItem(lineItem){
       lineItem.destroyRecord();
     },

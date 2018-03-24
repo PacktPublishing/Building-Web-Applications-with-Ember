@@ -29,6 +29,7 @@
   <thead>
     <tr>
       <th>Description</th>
+      <th>Category</th>
       <th>Date</th>
       <th>Amount</th>
       <th>Percent</th>
@@ -46,6 +47,11 @@
                 {{v-get lineItem 'description' 'message'}}
               </div>
             {{/if}}
+          </td>
+          <td>
+            {{#power-select selected=lineItem.category options=categories onchange=(action "changeCategory" lineItem) as |category|}}
+              {{category.name}}
+            {{/power-select}}
           </td>
           <td>
             {{input type="date" value=lineItem.date placeholder="Date"}}
@@ -69,6 +75,7 @@
           </td>
         {{else}}
           <td>{{lineItem.description}}</td>
+          <td>{{lineItem.category.name}}</td>
           <td>{{lineItem.date}}</td>
           <td>{{lineItem.amount}}</td>
           <td>{{percentage lineItem.amount totalAmount}}%</td>
@@ -79,7 +86,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="5">
+      <td colspan="6">
         <button {{action 'addNewLineItem'}} class="btn btn-default">Add Line Item</button>
       </td>
     </tr>
