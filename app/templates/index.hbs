@@ -1,10 +1,11 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Description</th>
+      <th>{{#link-to 'index' (query-params sort='description')}}Description{{/link-to}}</th>
       <th>Category</th>
       <th>Date</th>
-      <th>Amount</th>
+      <th>{{#link-to 'index' (query-params sort='amount')}}Amount{{/link-to}}</th>
+      <th>Percentage</th>
       <th>Percent</th>
       <th></th>
     </tr>
