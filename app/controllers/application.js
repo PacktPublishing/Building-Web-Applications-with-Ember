@@ -33,5 +33,22 @@ export default Controller.extend({
       output += `Expense: ${item.get('isExpense')}`;
     });
     return output;
-  })
+  }),
+  actions: {
+    addNewLineItem(){
+      let newLineItem = LineItem.create({
+        description: this.get('newDescription'),
+        date: this.get('newDate'),
+        amount: this.get('newAmount'),
+        isExpense: this.get('newIsExpense'),
+      });
+      this.get('lineItems').pushObject(newLineItem);
+      this.setProperties({
+        newDescription: '',
+        newDate: '',
+        newAmount: '',
+        newIsExpense: false,
+      })
+    }
+  }
 });
