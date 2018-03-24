@@ -22,6 +22,11 @@ export default Controller.extend({
       ]
     )
   },
+  totalAmount: computed('lineItems.[]', function(){
+          return this.get('lineItems').reduce((previousValue, item) =>{
+                  return parseFloat(item.get('amount')) + previousValue;
+          }, 0);
+  }),
   lineItemsOutput: computed('lineItems.[]', function(){
     let lineItems = this.get('lineItems'),
     output = '';

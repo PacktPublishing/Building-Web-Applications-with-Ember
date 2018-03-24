@@ -31,6 +31,7 @@
       <th>Description</th>
       <th>Date</th>
       <th>Amount</th>
+      <th>Percent</th>
     </tr>
   </thead>
   <tbody>
@@ -39,6 +40,7 @@
         <td>{{lineItem.description}}</td>
         <td>{{lineItem.date}}</td>
         <td>{{lineItem.amount}}</td>
+        <td>{{percentage lineItem.amount totalAmount}}%</td>
       </tr>
     {{/each}}
   </tbody>
@@ -52,6 +54,8 @@
       </td>
       <td>
         {{input type="text" value=newAmount placeholder="Amount"}}
+      </td>
+      <td>
         <label>
           {{input type="checkbox" checked=newIsExpense}}
           Is an Expense
@@ -59,7 +63,7 @@
       </td>
     </tr>
     <tr>
-      <td colspan="3">
+      <td colspan="4">
         <button {{action 'addNewLineItem'}} class="btn btn-default">Add Line Item</button>
       </td>
     </tr>
