@@ -1,2 +1,43 @@
 @import "bootstrap";
 @import "ember-power-select";
+
+
+.loading{
+    width: 146px;
+    margin: 100px auto;
+}
+
+.circleG{
+    background-color: rgb(255,255,255);
+    float: left;
+    height: 31px;
+    margin-left: 17px;
+    width: 31px;
+    animation-name: bounce_circleG;
+    animation-duration: 2.24s;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    border-radius: 20px;
+}
+
+.circleG_1{
+    animation-delay: 0.45s;
+}
+
+.circleG_2{
+    animation-delay: 1.05s;
+}
+
+.circleG_3{
+    animation-delay: 1.35s;
+}
+
+@keyframes bounce_circleG{
+    0%{}
+
+    50%{
+        background-color: rgb(0,0,0);
+    }
+
+    100%{}
+}
