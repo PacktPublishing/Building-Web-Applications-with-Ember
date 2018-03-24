@@ -12,6 +12,7 @@ const LineItem = Object.extend({
 });
 
 export default Controller.extend({
+  welcomeText: "Welcome, I'm your Expenze Buddy!",
   init(){
     this._super(...arguments);
     this.set('lineItems', [
