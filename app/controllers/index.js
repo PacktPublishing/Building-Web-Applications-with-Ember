@@ -20,17 +20,8 @@ export default Controller.extend({
     return this.get('store').findAll('category');
   }),
   actions: {
-    changeCategory(lineItem, category){
-      lineItem.set('category', category);
-    },
-    deleteLineItem(lineItem){
-      lineItem.destroyRecord();
-    },
     addNewLineItem(){
       this.get('store').createRecord('line-item');
-    },
-    saveLineItem(lineItem){
-      lineItem.save();
     }
   }
 });
