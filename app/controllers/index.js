@@ -2,7 +2,6 @@ import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 
 export default Controller.extend({
-  welcomeText: "Welcome, I'm your Expenze Buddy!",
   totalAmount: computed('model.@each.amount', function(){
           return this.get('model').reduce((previousValue, item) =>{
                   return parseFloat(item.get('amount')) + previousValue;

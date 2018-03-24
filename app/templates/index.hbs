@@ -1,0 +1,67 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Percent</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |lineItem|}}
+      <tr class="{{unless lineItem.isExpense 'info'}}">
+        {{#if lineItem.isNew}}
+          <td>
+            {{input type="text" value=lineItem.description placeholder="Description"}}
+            {{#if (v-get lineItem 'description' 'isInvalid')}}
+              <div class="text-danger">
+                {{v-get lineItem 'description' 'message'}}
+              </div>
+            {{/if}}
+          </td>
+          <td>
+            {{#power-select selected=lineItem.category options=categories onchange=(action "changeCategory" lineItem) as |category|}}
+              {{category.name}}
+            {{/power-select}}
+          </td>
+          <td>
+            {{input type="date" value=lineItem.date placeholder="Date"}}
+          </td>
+          <td>
+            {{input type="text" value=lineItem.amount placeholder="Amount"}}
+            {{#if (v-get lineItem 'amount' 'isInvalid')}}
+              <div class="text-danger">
+                {{v-get lineItem 'amount' 'message'}}
+              </div>
+            {{/if}}
+          </td>
+          <td>
+            <label>
+              {{input type="checkbox" checked=lineItem.isExpense}}
+              Is an Expense
+            </label>
+          </td>
+          <td>
+            <button {{action 'saveLineItem' lineItem}} type="button" class="btn btn-primary">Save</button>
+          </td>
+        {{else}}
+          <td>{{lineItem.description}}</td>
+          <td>{{lineItem.category.name}}</td>
+          <td>{{lineItem.date}}</td>
+          <td>{{lineItem.amount}}</td>
+          <td>{{percentage lineItem.amount totalAmount}}%</td>
+          <td><button {{action 'deleteLineItem' lineItem}} type="button" class="btn btn-danger">Delete</button></td>
+        {{/if}}
+      </tr>
+    {{/each}}
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="6">
+        <button {{action 'addNewLineItem'}} class="btn btn-default">Add Line Item</button>
+      </td>
+    </tr>
+  </tfoot>
+</table>

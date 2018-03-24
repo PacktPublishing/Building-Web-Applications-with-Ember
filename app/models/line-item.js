@@ -12,7 +12,7 @@ const Validations = buildValidations({
 export default DS.Model.extend(Validations, {
   description: DS.attr('string'),
   date: DS.attr('date'),
-  amount: DS.attr('number'),
-  isExpense: DS.attr('boolean'),
+  amount: DS.attr('number', { defaultValue: 0 }),
+  isExpense: DS.attr('boolean', { defaultValue: true }),
   category: DS.belongsTo('category')
 });
