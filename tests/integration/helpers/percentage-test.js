@@ -6,12 +6,15 @@ import hbs from 'htmlbars-inline-precompile';
 module('Integration | Helper | percentage', function(hooks) {
   setupRenderingTest(hooks);
 
+  let valueOne = 1290, valueTwo = 5020;
+
   // Replace this with your real tests.
   test('it renders', async function(assert) {
-    this.set('inputValue', '1234');
+    this.set('valueOne', valueOne);
+    this.set('valueTwo', valueTwo);
 
-    await render(hbs`{{percentage inputValue}}`);
+    await render(hbs`{{percentage valueOne valueTwo}}`);
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    assert.equal(this.element.textContent.trim(), (valueOne * 100/Math.max(valueTwo, 1)).toFixed(2));
   });
 });
