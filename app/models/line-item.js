@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { computed } from '@ember/object';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
@@ -14,5 +15,14 @@ export default DS.Model.extend(Validations, {
   date: DS.attr('date'),
   amount: DS.attr('number', { defaultValue: 0 }),
   isExpense: DS.attr('boolean', { defaultValue: true }),
-  category: DS.belongsTo('category')
+  category: DS.belongsTo('category'),
+  dateInput: computed({
+    get(){
+      return this.get('date');
+    },
+    set(key, value){
+      this.set('date', new Date(value));
+      return value;
+    }
+  })
 });

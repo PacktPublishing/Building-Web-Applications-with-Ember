@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each model as |lineItem|}}
+    {{#each sortedLineItems as |lineItem|}}
       <tr class="{{unless lineItem.isExpense 'info'}}">
         {{#if lineItem.isNew}}
           <td>
@@ -27,7 +27,7 @@
             {{/power-select}}
           </td>
           <td>
-            {{input type="date" value=lineItem.date placeholder="Date"}}
+            {{input type="date" value=lineItem.dateInput placeholder="Date"}}
           </td>
           <td>
             {{input type="text" value=lineItem.amount placeholder="Amount"}}
