@@ -22,6 +22,12 @@ export default Controller.extend({
   actions: {
     addNewLineItem(){
       this.get('store').createRecord('line-item');
+    },
+    deleteLineItem(lineItem){
+      lineItem.destroyRecord();
+    },
+    saveLineItem(lineItem){
+      lineItem.save();
     }
   }
 });

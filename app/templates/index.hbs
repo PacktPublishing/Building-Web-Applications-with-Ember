@@ -12,7 +12,7 @@
   </thead>
   <tbody>
     {{#each sortedLineItems as |lineItem|}}
-      {{line-item-row model=lineItem totalAmount=totalAmount categories=categories}}
+      {{line-item-row model=lineItem totalAmount=totalAmount categories=categories saveRecord=(action 'saveLineItem') destroyRecord=(action 'deleteLineItem')}}
     {{/each}}
   </tbody>
   <tfoot>
