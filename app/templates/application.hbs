@@ -32,15 +32,17 @@
       <th>Date</th>
       <th>Amount</th>
       <th>Percent</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-    {{#each lineItems as |lineItem|}}
+    {{#each model as |lineItem|}}
       <tr class="{{unless lineItem.isExpense 'info'}}">
         <td>{{lineItem.description}}</td>
         <td>{{lineItem.date}}</td>
         <td>{{lineItem.amount}}</td>
         <td>{{percentage lineItem.amount totalAmount}}%</td>
+        <td><button {{action 'deleteLineItem' lineItem}} type="button" class="btn btn-danger">Delete</button></td>
       </tr>
     {{/each}}
   </tbody>
@@ -63,11 +65,10 @@
       </td>
     </tr>
     <tr>
-      <td colspan="4">
+      <td colspan="5">
         <button {{action 'addNewLineItem'}} class="btn btn-default">Add Line Item</button>
       </td>
     </tr>
   </tfoot>
 </table>
-
 {{outlet}}

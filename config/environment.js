@@ -17,6 +17,13 @@ module.exports = function(environment) {
       }
     },
 
+    firebase: {
+      apiKey: 'AIzaSyDrq_xgpAa95Ny2RyEQysO0Zcuo9cu4etc',
+      authDomain: 'expenze-buddy.firebaseapp.com',
+      databaseURL: 'https://expenze-buddy.firebaseio.com',
+      storageBucket: '',
+    },
+
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
