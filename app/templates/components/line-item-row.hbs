@@ -1,0 +1,43 @@
+{{#if model.isNew}}
+  <td>
+    {{input type="text" value=model.description placeholder="Description"}}
+    {{#if (v-get model 'description' 'isInvalid')}}
+      <div class="text-danger">
+        {{v-get model 'description' 'message'}}
+      </div>
+    {{/if}}
+  </td>
+  <td>
+    {{#power-select selected=model.category options=categories onchange=(action "changeCategory" model) as |category|}}
+      {{category.name}}
+    {{/power-select}}
+  </td>
+  <td>
+    {{input type="date" value=model.dateInput placeholder="Date"}}
+  </td>
+  <td>
+    {{input type="text" value=model.amount placeholder="Amount"}}
+    {{#if (v-get model 'amount' 'isInvalid')}}
+      <div class="text-danger">
+        {{v-get model 'amount' 'message'}}
+      </div>
+    {{/if}}
+  </td>
+  <td>
+    <label>
+      {{input type="checkbox" checked=model.isExpense}}
+      Is an Expense
+    </label>
+  </td>
+  <td>
+    <button {{action 'saveLineItem' model}} type="button" class="btn btn-primary">Save</button>
+  </td>
+{{else}}
+  <td>{{model.description}}</td>
+  <td>{{model.category.name}}</td>
+  <td>{{model.date}}</td>
+  <td>{{model.amount}}</td>
+  <td>{{percentage model.amount totalAmount}}%</td>
+  <td><button {{action 'deleteLineItem' model}} type="button" class="btn btn-danger">Delete</button></td>
+{{/if}}
+{{yield}}

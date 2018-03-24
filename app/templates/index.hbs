@@ -12,50 +12,7 @@
   </thead>
   <tbody>
     {{#each sortedLineItems as |lineItem|}}
-      <tr class="{{unless lineItem.isExpense 'info'}}">
-        {{#if lineItem.isNew}}
-          <td>
-            {{input type="text" value=lineItem.description placeholder="Description"}}
-            {{#if (v-get lineItem 'description' 'isInvalid')}}
-              <div class="text-danger">
-                {{v-get lineItem 'description' 'message'}}
-              </div>
-            {{/if}}
-          </td>
-          <td>
-            {{#power-select selected=lineItem.category options=categories onchange=(action "changeCategory" lineItem) as |category|}}
-              {{category.name}}
-            {{/power-select}}
-          </td>
-          <td>
-            {{input type="date" value=lineItem.dateInput placeholder="Date"}}
-          </td>
-          <td>
-            {{input type="text" value=lineItem.amount placeholder="Amount"}}
-            {{#if (v-get lineItem 'amount' 'isInvalid')}}
-              <div class="text-danger">
-                {{v-get lineItem 'amount' 'message'}}
-              </div>
-            {{/if}}
-          </td>
-          <td>
-            <label>
-              {{input type="checkbox" checked=lineItem.isExpense}}
-              Is an Expense
-            </label>
-          </td>
-          <td>
-            <button {{action 'saveLineItem' lineItem}} type="button" class="btn btn-primary">Save</button>
-          </td>
-        {{else}}
-          <td>{{lineItem.description}}</td>
-          <td>{{lineItem.category.name}}</td>
-          <td>{{lineItem.date}}</td>
-          <td>{{lineItem.amount}}</td>
-          <td>{{percentage lineItem.amount totalAmount}}%</td>
-          <td><button {{action 'deleteLineItem' lineItem}} type="button" class="btn btn-danger">Delete</button></td>
-        {{/if}}
-      </tr>
+      {{line-item-row model=lineItem totalAmount=totalAmount categories=categories}}
     {{/each}}
   </tbody>
   <tfoot>
